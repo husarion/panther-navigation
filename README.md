@@ -11,7 +11,7 @@ Before running the navigation demo you need to start the LIDAR interface.
 
 For Velodyne Puck see: https://github.com/husarion/velodyne-docker
 
-:bulb: **NOTE:** Remember to provide static transform between LIDAR and robot frame (default: `velodyne` and `base_link` see: https://github.com/husarion/velodyne-docker/#run-with-the-husarion-panther-robot).
+:bulb: **NOTE:** Remember to provide static transform between LIDAR and robot frame (default: `velodyne` and `base_link` see: https://github.com/husarion/velodyne-docker#run-with-the-husarion-panther-robot).
 
 ### Download this repository
 

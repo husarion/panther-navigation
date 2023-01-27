@@ -53,7 +53,6 @@ Run navigation with localization.
 ```bash
 source setup_virtual_desktop.sh
 docker compose -f compose.ros1_bridge.yaml -f compose.pc2ls.yaml -f compose.nav2.yaml -f compose.vnc.yaml -f compose.rviz.yaml up
-docker compose -f compose.ros1_bridge.yaml -f compose.pc2ls.yaml -f compose.nav2.yaml up
 # if you are not using 3D LIDAR run:
 # docker compose -f compose.ros1_bridge.yaml -f compose.nav2.yaml up
 ```

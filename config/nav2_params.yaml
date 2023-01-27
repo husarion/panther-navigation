@@ -333,7 +333,7 @@ amcl:
     always_reset_initial_pose: True
     initial_pose:
       x: 0.0
-      y: 8.0
+      y: 0.0
       yaw: 0.0
 
     tf_broadcast: True

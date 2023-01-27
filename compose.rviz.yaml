@@ -1,0 +1,13 @@
+services:
+  rviz:
+    image: husarion/rviz2:humble-11.2.4
+    container_name: rviz2
+    network_mode: host
+    ipc: host
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./config/panther.rviz:/root/.rviz2/default.rviz
+    environment:
+      - ROS_DOMAIN_ID=0
+      - DISPLAY=${DISPLAY:?err}
+      - LIBGL_ALWAYS_SOFTWARE=1

@@ -42,7 +42,7 @@ docker compose -f compose.ros1_bridge.yaml -f compose.pc2ls.yaml -f compose.mapp
 # docker compose -f compose.ros1_bridge.yaml -f compose.mapping.yaml up
 ```
 
-To access the NUC desktop and Rviz2 interface go to [10.15.20.3:8080](http://10.15.20.3:8080/vnc_auto.html) in your browser. You need to specify the password (default: husarion).
+To access the NUC desktop and Rviz2 interface go to [10.15.20.3:8080/vnc_auto.html](http://10.15.20.3:8080/vnc_auto.html) in your browser. You need to specify the password (default: husarion).
 
 `slam_toolbox` interface for mapping the environment will be launched. Map will be automatically saved every 5 seconds and stored in the `maps` directory. You can drive the robot around using the WebUI interface available at http://10.15.20.2:8000 in your browser. After mapping is complete you can terminate docker containers with `ctrl+c`.
 

@@ -7,6 +7,8 @@ services:
     volumes:
       - ./config/nav2_params.yaml:/nav2_params.yaml
       - ./maps:/maps
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
     command: >
       ros2 launch nav2_bringup bringup_launch.py
         params_file:=/nav2_params.yaml

@@ -8,6 +8,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ./config/panther.rviz:/root/.rviz2/default.rviz
     environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
       - ROS_DOMAIN_ID=0
       - DISPLAY=${DISPLAY:?err}
       - LIBGL_ALWAYS_SOFTWARE=1

@@ -19,7 +19,7 @@ services:
     image: husarion/webui-ros-joystick:noetic
     container_name: webui-ros-joystick
     network_mode: host
-    command: roslaunch webui-ros-joystick panther_webui.launch --wait
+    command: roslaunch webui-ros-joystick panther_webui.launch e_stop:=false --wait
 
   ros1_bridge:
     image: ros:galactic-ros1-bridge

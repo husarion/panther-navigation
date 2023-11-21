@@ -4,6 +4,8 @@ services:
     container_name: pointcloud_to_laserscan
     network_mode: host
     ipc: host
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
     command: >
       ros2 run pointcloud_to_laserscan pointcloud_to_laserscan_node 
         --ros-args 

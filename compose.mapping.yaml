@@ -6,6 +6,8 @@ services:
     ipc: host
     volumes:
       - ./config/slam_toolbox_params.yaml:/slam_params.yaml
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
     command: >
       ros2 launch slam_toolbox online_sync_launch.py
         slam_params_file:=/slam_params.yaml
@@ -18,4 +20,4 @@ services:
     ipc: host
     volumes:
       - ./maps:/maps
-    command: bash -c "while true; do ros2 run nav2_map_server map_saver_cli --free 0.15 --fmt png -f /maps/map; sleep 5; done"
+    command: bash -c "while true; do ros2 run nav2_map_server map_saver_cli --free 0.15 --fmt png -f /maps/map && chmod 777 /maps/*; sleep 5; done"

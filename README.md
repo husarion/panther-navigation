@@ -7,7 +7,7 @@ The given example is configured for Velodyne Puck, but any LIDAR publishing Poin
 
 ### Running lidar interface
 
-Before running the navigation demo you need to start the LIDAR interface. 
+Before running the navigation demo you need to start the LIDAR interface.
 
 For Velodyne Puck see: https://github.com/husarion/velodyne-docker
 

@@ -6,4 +6,3 @@ vncserver
 # make desktop accessible
 export DISPLAY=:1
 xhost local:root
-

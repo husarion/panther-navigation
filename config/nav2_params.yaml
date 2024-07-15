@@ -1,8 +1,9 @@
+---
 ### NAVIGATION ###
 
 bt_navigator:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
     global_frame: map
     robot_base_frame: base_link
     plugin_lib_names:
@@ -33,11 +34,11 @@ bt_navigator:
 
 bt_navigator_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 controller_server:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
     controller_frequency: 10.0
 
@@ -46,26 +47,26 @@ controller_server:
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
 
-    progress_checker_plugin: "progress_checker"
+    progress_checker_plugin: progress_checker
     progress_checker:
-      plugin: "nav2_controller::SimpleProgressChecker"
+      plugin: nav2_controller::SimpleProgressChecker
       required_movement_radius: 0.5
       movement_time_allowance: 10.0
 
-    goal_checker_plugin: "goal_checker"
+    goal_checker_plugin: goal_checker
     goal_checker:
-      plugin: "nav2_controller::SimpleGoalChecker"
+      plugin: nav2_controller::SimpleGoalChecker
       xy_goal_tolerance: 0.1
       yaw_goal_tolerance: 0.25
-      stateful: True # if stateful is true goal checker will not check if the xy position matches again once it is found to be true.
+      stateful: true # if stateful is true goal checker will not check if the xy position matches again once it is found to be true.
 
-    controller_plugins: ["FollowPath"]
+    controller_plugins: [FollowPath]
     FollowPath:
       # Shim controller first rotates robot in place to orientation of global path
       # and the switches to DWB - otherwise DWB won't turn in place, but with arc, which
       # is less optimal
-      plugin: "nav2_rotation_shim_controller::RotationShimController"
-      primary_controller: "dwb_core::DWBLocalPlanner"
+      plugin: nav2_rotation_shim_controller::RotationShimController
+      primary_controller: dwb_core::DWBLocalPlanner
       angular_dist_threshold: 0.4 # quite low value to avoid moving in arc
       forward_sampling_distance: 0.5
       rotate_to_heading_angular_vel: 1.5
@@ -74,9 +75,9 @@ controller_server:
       max_angular_accel: 10.0
       simulate_ahead_time: 1.0
 
-      debug_trajectory_details: True
+      debug_trajectory_details: true
 
-      # Velocity/accelaration limits also have to be adjusted in the velocity smoother
+      # Velocity/acceleration limits also have to be adjusted in the velocity smoother
       min_vel_x: 0.0
       max_vel_x: 0.5
       acc_lim_x: 1.0
@@ -99,30 +100,18 @@ controller_server:
       vtheta_samples: 20
 
       transform_tolerance: 1.0
-      short_circuit_trajectory_evaluation: True
+      short_circuit_trajectory_evaluation: true
 
-      trajectory_generator_name: "dwb_plugins::StandardTrajectoryGenerator"
+      trajectory_generator_name: dwb_plugins::StandardTrajectoryGenerator
       sim_time: 0.75 # low value to avoid slow movement near goal
-      discretize_by_time: False
+      discretize_by_time: false
       linear_granularity: 0.05
       angular_granularity: 0.025
 
       # Critics used for scoring trajectories created by trajectory generator
       # Final score is a sum of critics' score
-      critics:
-        [
-          "BaseObstacle",
-          "ObstacleFootprint",
-
-          "GoalAlign",
-          "GoalDist",
-
-          "PathAlign",
-          "PathDist",
-
-          "RotateToGoal",
-          "Oscillation",
-        ]
+      critics: [BaseObstacle, ObstacleFootprint, GoalAlign, GoalDist, PathAlign, PathDist, RotateToGoal,
+        Oscillation]
 
       BaseObstacle.scale: 0.02
 
@@ -142,12 +131,12 @@ controller_server:
 
 controller_server_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 local_costmap:
   local_costmap:
     ros__parameters:
-      use_sim_time: False
+      use_sim_time: false
 
       global_frame: odom
       robot_base_frame: base_link
@@ -159,45 +148,45 @@ local_costmap:
       height: 5
       resolution: 0.05
 
-      always_send_full_costmap: True
-      rolling_window: True
+      always_send_full_costmap: true
+      rolling_window: true
 
-      footprint: "[[0.45, 0.47], [0.45, -0.47], [-0.45, -0.47], [-0.45, 0.47]]"
+      footprint: '[[0.45, 0.47], [0.45, -0.47], [-0.45, -0.47], [-0.45, 0.47]]'
 
-      plugins: ["obstacle_layer", "inflation_layer"]
+      plugins: [obstacle_layer, inflation_layer]
       obstacle_layer:
-        plugin: "nav2_costmap_2d::ObstacleLayer"
-        enabled: True
-        footprint_clearing_enabled: True
+        plugin: nav2_costmap_2d::ObstacleLayer
+        enabled: true
+        footprint_clearing_enabled: true
         observation_sources: scan
         scan:
           topic: /velodyne_points
           min_obstacle_height: 0.2
           max_obstacle_height: 0.5
-          clearing: True
-          marking: True
-          data_type: "PointCloud2"
+          clearing: true
+          marking: true
+          data_type: PointCloud2
           raytrace_max_range: 5.0
           raytrace_min_range: 0.0
           obstacle_max_range: 5.0
           obstacle_min_range: 0.25
       inflation_layer:
-        plugin: "nav2_costmap_2d::InflationLayer"
-        enabled: True
+        plugin: nav2_costmap_2d::InflationLayer
+        enabled: true
         cost_scaling_factor: 3.0
         inflation_radius: 1.5
 
   local_costmap_client:
     ros__parameters:
-      use_sim_time: False
+      use_sim_time: false
   local_costmap_rclcpp_node:
     ros__parameters:
-      use_sim_time: False
+      use_sim_time: false
 
 global_costmap:
   global_costmap:
     ros__parameters:
-      use_sim_time: False
+      use_sim_time: false
 
       global_frame: map
       robot_base_frame: base_link
@@ -207,71 +196,71 @@ global_costmap:
 
       resolution: 0.05
 
-      always_send_full_costmap: True
-      track_unknown_space: True # if false, treats unknown space as free space, else as unknown space
+      always_send_full_costmap: true
+      track_unknown_space: true # if false, treats unknown space as free space, else as unknown space
 
-      footprint: "[[0.45, 0.47], [0.45, -0.47], [-0.45, -0.47], [-0.45, 0.47]]"
+      footprint: '[[0.45, 0.47], [0.45, -0.47], [-0.45, -0.47], [-0.45, 0.47]]'
 
-      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
+      plugins: [static_layer, obstacle_layer, inflation_layer]
       static_layer:
-        plugin: "nav2_costmap_2d::StaticLayer"
-        enabled: True
-        map_subscribe_transient_local: True
+        plugin: nav2_costmap_2d::StaticLayer
+        enabled: true
+        map_subscribe_transient_local: true
         map_topic: /map
       obstacle_layer:
-        plugin: "nav2_costmap_2d::ObstacleLayer"
-        enabled: True
-        footprint_clearing_enabled: True
+        plugin: nav2_costmap_2d::ObstacleLayer
+        enabled: true
+        footprint_clearing_enabled: true
         observation_sources: scan
         scan:
           topic: /velodyne_points
           min_obstacle_height: 0.2
           max_obstacle_height: 0.5
-          clearing: True
-          marking: True
-          data_type: "PointCloud2"
+          clearing: true
+          marking: true
+          data_type: PointCloud2
           raytrace_max_range: 5.0
           raytrace_min_range: 0.0
           obstacle_max_range: 5.0
           obstacle_min_range: 0.25
       inflation_layer:
-        plugin: "nav2_costmap_2d::InflationLayer"
-        enabled: True
+        plugin: nav2_costmap_2d::InflationLayer
+        enabled: true
         cost_scaling_factor: 3.0
         inflation_radius: 1.5
 
   global_costmap_client:
     ros__parameters:
-      use_sim_time: False
+      use_sim_time: false
   global_costmap_rclcpp_node:
     ros__parameters:
-      use_sim_time: False
+      use_sim_time: false
 
 planner_server:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
-    planner_plugins: ["GridBased"]
+    planner_plugins: [GridBased]
     GridBased:
-      plugin: "nav2_smac_planner/SmacPlanner2D"
+      plugin: nav2_smac_planner/SmacPlanner2D
       tolerance: 0.125 # tolerance for planning if unable to reach exact pose, in meters
-      downsample_costmap: False # whether or not to downsample the map
+      downsample_costmap: false # whether or not to downsample the map
       downsampling_factor: 1 # multiplier for the resolution of the costmap layer (e.g. 2 on a 5cm costmap would be 10cm)
       allow_unknown: true # allow traveling in unknown space
       max_iterations: 1000000 # maximum total iterations to search for before failing (in case unreachable), set to -1 to disable
       max_on_approach_iterations: 1000 # maximum number of iterations to attempt to reach goal once in tolerance
       max_planning_time: 2.0 # max time in s for planner to plan, smooth
-      motion_model_for_search: "MOORE" # 2D Moore, Von Neumann
+      motion_model_for_search: MOORE   # 2D Moore, Von Neumann
       cost_travel_multiplier: 2.0 # Cost multiplier to apply to search to steer away from high cost areas. Larger values will place in the center of aisles more exactly (if non-`FREE` cost potential field exists) but take slightly longer to compute. To optimize for speed, a value of 1.0 is reasonable. A reasonable tradeoff value is 2.0. A value of 0.0 effective disables steering away from obstacles and acts like a naive binary search A*.
-      use_final_approach_orientation: False # Whether to set the final path pose at the goal's orientation to the requested orientation (false) or in line with the approach angle so the robot doesn't rotate to heading (true)
+      use_final_approach_orientation: false # Whether to set the final path pose at the goal's orientation to the requested orientation (false) or in line with the approach angle so the robot doesn't rotate to heading (true)
 
 planner_server_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 recoveries_server:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
     global_frame: odom
     robot_base_frame: base_link
@@ -281,13 +270,13 @@ recoveries_server:
     footprint_topic: local_costmap/published_footprint
     cycle_frequency: 10.0
 
-    recovery_plugins: ["spin", "backup", "wait"]
+    recovery_plugins: [spin, backup, wait]
     spin:
-      plugin: "nav2_recoveries/Spin"
+      plugin: nav2_recoveries/Spin
     backup:
-      plugin: "nav2_recoveries/BackUp"
+      plugin: nav2_recoveries/BackUp
     wait:
-      plugin: "nav2_recoveries/Wait"
+      plugin: nav2_recoveries/Wait
 
     # spin & backup
     simulate_ahead_time: 2.0
@@ -299,24 +288,24 @@ recoveries_server:
 
 behavior_server:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 waypoint_follower:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
     loop_rate: 20
     stop_on_failure: false
-    waypoint_task_executor_plugin: "wait_at_waypoint"
+    waypoint_task_executor_plugin: wait_at_waypoint
     wait_at_waypoint:
-      plugin: "nav2_waypoint_follower::WaitAtWaypoint"
-      enabled: True
+      plugin: nav2_waypoint_follower::WaitAtWaypoint
+      enabled: true
       waypoint_pause_duration: 200
 
 ### LOCALIZATION ###
 
 amcl:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
     global_frame_id: map
     odom_frame_id: odom
@@ -329,14 +318,14 @@ amcl:
     # Humble
     robot_model_type: nav2_amcl::DifferentialMotionModel
 
-    set_initial_pose: True
-    always_reset_initial_pose: True
+    set_initial_pose: true
+    always_reset_initial_pose: true
     initial_pose:
       x: 0.0
       y: 0.0
       yaw: 0.0
 
-    tf_broadcast: True
+    tf_broadcast: true
     transform_tolerance: 1.0
 
     alpha1: 0.2
@@ -348,7 +337,7 @@ amcl:
     # Beam skipping - ignores beams for which a majoirty of particles do not agree with the map
     # prevents correct particles from getting down weighted because of unexpected obstacles
     # such as humans
-    do_beamskip: False
+    do_beamskip: false
     beam_skip_distance: 0.5
     beam_skip_error_threshold: 0.9
     beam_skip_threshold: 0.3
@@ -385,15 +374,15 @@ amcl:
 
 amcl_map_client:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 amcl_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: false
 
 ### MAP SERVER ###
 
 map_server:
   ros__parameters:
-    use_sim_time: False
-    yaml_filename: "map.yaml"
+    use_sim_time: false
+    yaml_filename: map.yaml

@@ -86,7 +86,7 @@ export USE_SIM_TIME=True
 Before using Nav2 for autonomous driving it is necessary to provide a map of the environment. If you already have a map you can skip this step.
 
 ```bash
-cd panther-navigation2
+cd panther-navigation
 docker compose -f compose.simulation.yaml  -f compose.pc2ls.yaml -f compose.mapping.yaml -f compose.rviz.yaml up
 ```
 
@@ -97,7 +97,7 @@ This will run the `slam_toolbox` interface for mapping environment. A map will b
 Run navigation with localization.
 
 ```bash
-cd panther_navigation2
+cd panther-navigation
 docker compose -f compose.simulation.yaml  -f compose.pc2ls.yaml -f compose.nav2.yaml -f compose.rviz.yaml up
 ```
 

@@ -7,6 +7,6 @@ services:
     environment:
       - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
     command: >
-      ros2 run pointcloud_to_laserscan pointcloud_to_laserscan_node 
-        --ros-args 
+      ros2 run pointcloud_to_laserscan pointcloud_to_laserscan_node
+        --ros-args
         -r cloud_in:=${POINTCLOUD2_TOPIC:-velodyne_points}
